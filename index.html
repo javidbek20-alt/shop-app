@@ -436,47 +436,78 @@ function downloadCSV(){
   }
 
   let table = `
-  <html>
-  <head>
-    <meta charset="UTF-8">
-  </head>
-  <body dir="rtl">
-    <table border="1">
-      <tr>
-        <th>تاریخ</th>
-        <th>جنس</th>
-        <th>تعداد</th>
-        <th>خرید فی دانه</th>
-        <th>فروش فی دانه</th>
-        <th>مجموع خرید</th>
-        <th>مجموع فروش</th>
-        <th>فایده / نقص</th>
-      </tr>
-  `;
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>گزارش دوکان</title>
+<style>
+  body{
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    padding: 20px;
+  }
+  h2{
+    text-align:center;
+    color:#0f766e;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+  }
+  th{
+    background:#0f766e;
+    color:white;
+    padding:10px;
+    border:1px solid #ccc;
+  }
+  td{
+    padding:10px;
+    border:1px solid #ccc;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+<h2>گزارش حسابداری دوکان</h2>
+
+<table>
+<tr>
+<th>تاریخ</th>
+<th>جنس</th>
+<th>تعداد</th>
+<th>خرید فی دانه</th>
+<th>فروش فی دانه</th>
+<th>مجموع خرید</th>
+<th>مجموع فروش</th>
+<th>فایده / نقص</th>
+</tr>
+`;
 
   filteredProducts.forEach(p => {
     table += `
-      <tr>
-        <td>${p.date}</td>
-        <td>${p.product}</td>
-        <td>${p.quantity}</td>
-        <td>${p.buyPrice}</td>
-        <td>${p.sellPrice}</td>
-        <td>${p.totalBuy}</td>
-        <td>${p.totalSell}</td>
-        <td>${p.profit}</td>
-      </tr>
-    `;
+<tr>
+<td>${p.date}</td>
+<td>${p.product}</td>
+<td>${p.quantity}</td>
+<td>${p.buyPrice}</td>
+<td>${p.sellPrice}</td>
+<td>${p.totalBuy}</td>
+<td>${p.totalSell}</td>
+<td>${p.profit}</td>
+</tr>
+`;
   });
 
   table += `
-    </table>
-  </body>
-  </html>
-  `;
+</table>
+</body>
+</html>
+`;
 
   let blob = new Blob([table], {
-    type: "application/vnd.ms-excel;charset=utf-8"
+    type: "text/html;charset=utf-8"
   });
 
   let link = document.createElement("a");
