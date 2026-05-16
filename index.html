@@ -334,14 +334,14 @@ function downloadCSV(){
   }
 
   const data = filteredProducts.map(p => ({
-    Date: p.date,
-    Product: p.product,
-    Quantity: p.quantity,
-    BuyPrice: p.buyPrice,
-    SellPrice: p.sellPrice,
-    TotalBuy: p.totalBuy,
-    TotalSell: p.totalSell,
-    Profit: p.profit
+   "تاریخ": p.date,
+    "نام جنس": p.product,
+    "تعداد": p.quantity,
+    "قیمت خرید": p.buyPrice,
+    "قیمت فروش": p.sellPrice,
+    "مجموع خرید": p.totalBuy,
+    "مجموع فروش": p.totalSell,
+    "فایده / نقص": p.profit
   }));
 
   const worksheet =
