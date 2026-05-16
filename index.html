@@ -4,18 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>حسابداری دوکان</title>
+
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0f766e">
 
 <style>
+
 *{
   box-sizing:border-box;
 }
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   direction:rtl;
   background:#ecfeff;
   color:#0f172a;
@@ -33,19 +35,7 @@ body{
   color:white;
   padding:28px 18px 35px;
   border-radius:0 0 35px 35px;
-  box-shadow:0 10px 25px rgba(15,118,110,.35);
   text-align:center;
-}
-
-.header h1{
-  margin:0;
-  font-size:28px;
-}
-
-.header p{
-  margin:8px 0 0;
-  font-size:14px;
-  opacity:.95;
 }
 
 .content{
@@ -61,48 +51,28 @@ body{
   box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
-.card h3{
-  margin:0 0 12px;
-  color:#0f766e;
-  font-size:18px;
-}
-
-input,select{
+input,select,button{
   width:100%;
   padding:14px;
   margin-top:10px;
-  border:1px solid #d1d5db;
   border-radius:16px;
   font-size:16px;
-  background:#f8fafc;
 }
 
-input:focus,select:focus{
-  outline:none;
-  border-color:#14b8a6;
-  background:white;
+input,select{
+  border:1px solid #d1d5db;
 }
 
 button{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
   border:none;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:bold;
-  color:white;
   background:#0f766e;
+  color:white;
+  font-weight:bold;
   cursor:pointer;
-}
-
-button:active{
-  transform:scale(.98);
 }
 
 .btn-green{background:#16a34a}
 .btn-purple{background:#7c3aed}
-.btn-orange{background:#f59e0b;color:#111827}
 .btn-red{background:#dc2626}
 
 .summary{
@@ -116,24 +86,6 @@ button:active{
   border-radius:20px;
   padding:14px;
   text-align:center;
-  font-size:14px;
-}
-
-.box span{
-  display:block;
-  margin-top:6px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-.profit-box{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.loss-box{
-  background:#fee2e2;
-  color:#991b1b;
 }
 
 .item{
@@ -142,20 +94,6 @@ button:active{
   padding:14px;
   margin-top:12px;
   border-right:6px solid #14b8a6;
-}
-
-.item-title{
-  font-size:19px;
-  font-weight:bold;
-  color:#0f172a;
-  margin-bottom:8px;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  margin:5px 0;
-  font-size:15px;
 }
 
 .green{
@@ -168,37 +106,6 @@ button:active{
   font-weight:bold;
 }
 
-.empty{
-  text-align:center;
-  color:#64748b;
-  padding:15px;
-}
-
-.footer{
-  text-align:center;
-  color:#64748b;
-  font-size:13px;
-  margin-top:20px;
-}
-
-@media print{
-  .no-print{
-    display:none;
-  }
-
-  body{
-    background:white;
-  }
-
-  .header{
-    box-shadow:none;
-  }
-
-  .card{
-    box-shadow:none;
-    border:1px solid #ddd;
-  }
-}
 </style>
 </head>
 
@@ -206,105 +113,120 @@ button:active{
 
 <div class="app">
 
-  <div class="header">
-    <h1>حسابداری دوکان</h1>
-    <p>ثبت خرید، فروش، فایده، نقص و گزارشات</p>
-  </div>
+<div class="header">
+<h1>حسابداری دوکان</h1>
+<p>ثبت خرید، فروش، فایده و نقص</p>
+</div>
 
-  <div class="content">
+<div class="content">
 
-    <div class="card no-print">
-      <h3>ثبت جنس جدید</h3>
+<div class="card">
 
-      <input type="date" id="date">
-      <input type="text" id="product" placeholder="نام جنس">
-      <input type="number" id="quantity" placeholder="تعداد">
-      <input type="number" id="buyPrice" placeholder="قیمت خرید فی دانه">
-      <input type="number" id="sellPrice" placeholder="قیمت فروش فی دانه">
+<h3>ثبت جنس</h3>
 
-      <button onclick="saveProduct()">ثبت جنس</button>
-    </div>
+<input type="date" id="date">
 
-    <div class="card no-print">
-      <h3>جستجو و گزارشات</h3>
+<input type="text" id="product" placeholder="نام جنس">
 
-      <select id="reportType" onchange="showProducts()">
-        <option value="daily">گزارش امروز</option>
-        <option value="weekly">گزارش این هفته</option>
-        <option value="monthly">گزارش این ماه</option>
-        <option value="custom">جستجو بین دو تاریخ</option>
-        <option value="all">همه معلومات</option>
-      </select>
+<input type="number" id="quantity" placeholder="تعداد">
 
-      <input type="date" id="fromDate" onchange="showProducts()">
-      <input type="date" id="toDate" onchange="showProducts()">
+<input type="number" id="buyPrice" placeholder="قیمت خرید">
 
-      <input type="text" id="searchText" onkeyup="showProducts()" placeholder="جستجو به نام جنس">
+<input type="number" id="sellPrice" placeholder="قیمت فروش">
 
-      <button class="btn-green" onclick="window.print()">چاپ / ذخیره PDF</button>
-      <button class="btn-purple" onclick="downloadCSV()">دانلود گزارش Excel</button>
-      <button class="btn-orange" id="installBtn" style="display:none">نصب در تلفن</button>
-    </div>
+<button onclick="saveProduct()">ثبت جنس</button>
 
-    <div class="card">
-      <h3>خلاصه گزارش</h3>
+</div>
 
-      <div class="summary">
-        <div class="box">
-          مجموع خرید
-          <span id="totalBuy">0</span>
-        </div>
+<div class="card">
 
-        <div class="box">
-          مجموع فروش
-          <span id="totalSell">0</span>
-        </div>
-      </div>
+<h3>گزارشات</h3>
 
-      <div class="box profit-box" style="margin-top:10px" id="resultBox">
-        نتیجه
-        <span id="totalProfit">0</span>
-      </div>
-    </div>
+<select id="reportType" onchange="showProducts()">
+<option value="all">همه معلومات</option>
+</select>
 
-    <div class="card">
-      <h3>لیست اجناس</h3>
-      <div id="products"></div>
-    </div>
+<input type="text" id="searchText"
+onkeyup="showProducts()"
+placeholder="جستجو">
 
-    <div class="footer">
-      Offline Shop Accounting App
-    </div>
+<button class="btn-green" onclick="window.print()">
+چاپ PDF
+</button>
 
-  </div>
+<button class="btn-purple" onclick="downloadCSV()">
+دانلود Excel
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>خلاصه</h3>
+
+<div class="summary">
+
+<div class="box">
+مجموع خرید
+<span id="totalBuy">0</span>
+</div>
+
+<div class="box">
+مجموع فروش
+<span id="totalSell">0</span>
+</div>
+
+</div>
+
+<div class="box" id="resultBox" style="margin-top:10px">
+<span id="totalProfit">0</span>
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>لیست اجناس</h3>
+
+<div id="products"></div>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
-let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
 let filteredProducts = [];
 
-document.getElementById("date").valueAsDate = new Date();
-document.getElementById("fromDate").valueAsDate = new Date();
-document.getElementById("toDate").valueAsDate = new Date();
-
-function todayDate(){
-  return new Date().toISOString().slice(0,10);
-}
+document.getElementById("date").valueAsDate =
+new Date();
 
 function saveProduct(){
-  let date = document.getElementById("date").value;
-  let product = document.getElementById("product").value.trim();
-  let quantity = Number(document.getElementById("quantity").value);
-  let buyPrice = Number(document.getElementById("buyPrice").value);
-  let sellPrice = Number(document.getElementById("sellPrice").value);
 
-  if(product === "" || quantity <= 0 || buyPrice < 0 || sellPrice < 0){
-    alert("لطفاً معلومات درست داخل کن");
-    return;
-  }
+  let date =
+  document.getElementById("date").value;
+
+  let product =
+  document.getElementById("product").value;
+
+  let quantity =
+  Number(document.getElementById("quantity").value);
+
+  let buyPrice =
+  Number(document.getElementById("buyPrice").value);
+
+  let sellPrice =
+  Number(document.getElementById("sellPrice").value);
 
   let totalBuy = quantity * buyPrice;
+
   let totalSell = quantity * sellPrice;
+
   let profit = totalSell - totalBuy;
 
   products.push({
@@ -318,208 +240,133 @@ function saveProduct(){
     profit
   });
 
-  localStorage.setItem("products", JSON.stringify(products));
-
-  document.getElementById("product").value = "";
-  document.getElementById("quantity").value = "";
-  document.getElementById("buyPrice").value = "";
-  document.getElementById("sellPrice").value = "";
+  localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+  );
 
   showProducts();
 }
 
-function getFilteredProducts(){
-  let type = document.getElementById("reportType").value;
-  let searchText = document.getElementById("searchText").value.toLowerCase();
-  let today = new Date();
-  let todayStr = todayDate();
-
-  return products.filter(p => {
-    let d = new Date(p.date);
-    let matchName = p.product.toLowerCase().includes(searchText);
-
-    if(!matchName) return false;
-
-    if(type === "daily"){
-      return p.date === todayStr;
-    }
-
-    if(type === "weekly"){
-      let diff = (today - d) / (1000 * 60 * 60 * 24);
-      return diff >= 0 && diff <= 7;
-    }
-
-    if(type === "monthly"){
-      return d.getMonth() === today.getMonth() &&
-             d.getFullYear() === today.getFullYear();
-    }
-
-    if(type === "custom"){
-      let from = document.getElementById("fromDate").value;
-      let to = document.getElementById("toDate").value;
-      return p.date >= from && p.date <= to;
-    }
-
-    return true;
-  });
-}
-
 function showProducts(){
-  let div = document.getElementById("products");
+
+  let div =
+  document.getElementById("products");
+
   div.innerHTML = "";
 
-  filteredProducts = getFilteredProducts();
+  filteredProducts = products;
 
   let totalBuy = 0;
   let totalSell = 0;
   let totalProfit = 0;
 
-  filteredProducts.slice().reverse().forEach(p => {
+  filteredProducts.forEach((p,index)=>{
+
     totalBuy += p.totalBuy;
     totalSell += p.totalSell;
     totalProfit += p.profit;
 
     div.innerHTML += `
-      <div class="item">
-        <div class="item-title">${p.product}</div>
 
-        <div class="row"><span>تاریخ</span><b>${p.date}</b></div>
-        <div class="row"><span>تعداد</span><b>${p.quantity}</b></div>
-        <div class="row"><span>خرید فی دانه</span><b>${p.buyPrice}</b></div>
-        <div class="row"><span>فروش فی دانه</span><b>${p.sellPrice}</b></div>
-        <div class="row"><span>مجموع خرید</span><b>${p.totalBuy}</b></div>
-        <div class="row"><span>مجموع فروش</span><b>${p.totalSell}</b></div>
+    <div class="item">
 
-        <div class="row">
-          <span>نتیجه</span>
-          <b class="${p.profit >= 0 ? 'green' : 'red'}">
-            ${p.profit >= 0 ? 'فایده' : 'نقص'}: ${p.profit}
-          </b>
-        </div>
+      <h3>${p.product}</h3>
 
-        <button class="btn-red no-print" onclick="deleteProduct(${products.indexOf(p)})">حذف</button>
-      </div>
+      <p>تاریخ: ${p.date}</p>
+
+      <p>تعداد: ${p.quantity}</p>
+
+      <p>خرید: ${p.buyPrice}</p>
+
+      <p>فروش: ${p.sellPrice}</p>
+
+      <p>مجموع خرید: ${p.totalBuy}</p>
+
+      <p>مجموع فروش: ${p.totalSell}</p>
+
+      <p class="${p.profit >=0 ? 'green':'red'}">
+
+      نتیجه:
+      ${p.profit}
+
+      </p>
+
+      <button class="btn-red"
+      onclick="deleteProduct(${index})">
+
+      حذف
+
+      </button>
+
+    </div>
+
     `;
   });
 
-  if(filteredProducts.length === 0){
-    div.innerHTML = `<div class="empty">هیچ معلومات پیدا نشد.</div>`;
-  }
+  document.getElementById("totalBuy").innerText =
+  totalBuy;
 
-  document.getElementById("totalBuy").innerText = totalBuy;
-  document.getElementById("totalSell").innerText = totalSell;
+  document.getElementById("totalSell").innerText =
+  totalSell;
 
-  let totalProfitEl = document.getElementById("totalProfit");
-  let resultBox = document.getElementById("resultBox");
-
-  if(totalProfit >= 0){
-    resultBox.className = "box profit-box";
-    totalProfitEl.innerText = "فایده: " + totalProfit;
-  }else{
-    resultBox.className = "box loss-box";
-    totalProfitEl.innerText = "نقص: " + totalProfit;
-  }
+  document.getElementById("totalProfit").innerText =
+  totalProfit;
 }
 
 function deleteProduct(index){
-  if(confirm("آیا حذف شود؟")){
-    products.splice(index,1);
-    localStorage.setItem("products", JSON.stringify(products));
-    showProducts();
-  }
+
+  products.splice(index,1);
+
+  localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+  );
+
+  showProducts();
 }
 
 function downloadCSV(){
+
   if(filteredProducts.length === 0){
-    alert("برای دانلود معلوماتی وجود ندارد");
+    alert("معلومات وجود ندارد");
     return;
   }
 
-  let table = `
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-<meta charset="UTF-8">
-<title>گزارش دوکان</title>
-<style>
-  body{
-    font-family: Arial, sans-serif;
-    direction: rtl;
-    padding: 20px;
-  }
-  h2{
-    text-align:center;
-    color:#0f766e;
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-  }
-  th{
-    background:#0f766e;
-    color:white;
-    padding:10px;
-    border:1px solid #ccc;
-  }
-  td{
-    padding:10px;
-    border:1px solid #ccc;
-    text-align:center;
-  }
-</style>
-</head>
-<body>
-<h2>گزارش حسابداری دوکان</h2>
+  const data = filteredProducts.map(p => ({
+    Date: p.date,
+    Product: p.product,
+    Quantity: p.quantity,
+    BuyPrice: p.buyPrice,
+    SellPrice: p.sellPrice,
+    TotalBuy: p.totalBuy,
+    TotalSell: p.totalSell,
+    Profit: p.profit
+  }));
 
-<table>
-<tr>
-<th>تاریخ</th>
-<th>جنس</th>
-<th>تعداد</th>
-<th>خرید فی دانه</th>
-<th>فروش فی دانه</th>
-<th>مجموع خرید</th>
-<th>مجموع فروش</th>
-<th>فایده / نقص</th>
-</tr>
-`;
+  const worksheet =
+  XLSX.utils.json_to_sheet(data);
 
-  filteredProducts.forEach(p => {
-    table += `
-<tr>
-<td>${p.date}</td>
-<td>${p.product}</td>
-<td>${p.quantity}</td>
-<td>${p.buyPrice}</td>
-<td>${p.sellPrice}</td>
-<td>${p.totalBuy}</td>
-<td>${p.totalSell}</td>
-<td>${p.profit}</td>
-</tr>
-`;
-  });
+  const workbook =
+  XLSX.utils.book_new();
 
-  table += `
-</table>
-</body>
-</html>
-`;
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    "Report"
+  );
 
-  let blob = new Blob([table], {
-    type: "text/html;charset=utf-8"
-  });
-
-  let link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "shop-report.html";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  XLSX.writeFile(
+    workbook,
+    "Shop_Report.xlsx"
+  );
 }
 
 showProducts();
+
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 </body>
 </html>
