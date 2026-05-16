@@ -430,39 +430,62 @@ function deleteProduct(index){
 }
 
 function downloadCSV(){
-
   if(filteredProducts.length === 0){
     alert("برای دانلود معلوماتی وجود ندارد");
     return;
   }
 
-  let csv =
-  "\uFEFFتاریخ,جنس,تعداد,خرید فی دانه,فروش فی دانه,مجموع خرید,مجموع فروش,فایده یا نقص\n";
+  let table = `
+  <html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body dir="rtl">
+    <table border="1">
+      <tr>
+        <th>تاریخ</th>
+        <th>جنس</th>
+        <th>تعداد</th>
+        <th>خرید فی دانه</th>
+        <th>فروش فی دانه</th>
+        <th>مجموع خرید</th>
+        <th>مجموع فروش</th>
+        <th>فایده / نقص</th>
+      </tr>
+  `;
 
   filteredProducts.forEach(p => {
-
-    csv +=
-    `${p.date},${p.product},${p.quantity},${p.buyPrice},${p.sellPrice},${p.totalBuy},${p.totalSell},${p.profit}\n`;
-
+    table += `
+      <tr>
+        <td>${p.date}</td>
+        <td>${p.product}</td>
+        <td>${p.quantity}</td>
+        <td>${p.buyPrice}</td>
+        <td>${p.sellPrice}</td>
+        <td>${p.totalBuy}</td>
+        <td>${p.totalSell}</td>
+        <td>${p.profit}</td>
+      </tr>
+    `;
   });
 
-  let blob = new Blob([csv], {
-    type:"text/csv;charset=utf-8;"
+  table += `
+    </table>
+  </body>
+  </html>
+  `;
+
+  let blob = new Blob([table], {
+    type: "application/vnd.ms-excel;charset=utf-8"
   });
 
   let link = document.createElement("a");
-
   link.href = URL.createObjectURL(blob);
-
-  link.download = "shop-report.csv";
-
+  link.download = "shop-report.xls";
   document.body.appendChild(link);
-
   link.click();
-
   document.body.removeChild(link);
 }
-});
 
 showProducts();
 </script>
