@@ -1,6 +1,6 @@
 {
   "name": "حسابداری دوکان",
-  "short_name": "دوکان",
+  "short_name": "حسابداری",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
